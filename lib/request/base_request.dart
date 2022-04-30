@@ -1,9 +1,12 @@
 // ignore_for_file: constant_identifier_names
+import 'package:hinet/core/hi_net_adapter.dart';
+import 'package:hinet/core/mock_adapter.dart';
+
 enum HttpMethod { GET, POST, DELETE }
 
 abstract class HiNetBaseRequest {
   // 请求路径参数 类似 /detail/1
-  String pathParams = "";
+  String? pathParams;
 
   // 请求参数
   Map<String, String> params = {};
@@ -38,11 +41,14 @@ abstract class HiNetBaseRequest {
     Uri uri;
     var pathStr = path();
     // 拼接参数
-    if (pathStr.endsWith('/')) {
-      pathStr = "$pathStr$pathParams";
-    } else {
-      pathStr = "$pathStr/$pathParams";
+    if (pathParams != null) {
+      if (pathStr.endsWith('/')) {
+        pathStr = "$pathStr$pathParams";
+      } else {
+        pathStr = "$pathStr/$pathParams";
+      }
     }
+
     // http和https切换
     if (useHttps()) {
       uri = Uri.https(authority(), pathStr, params);
@@ -66,5 +72,10 @@ abstract class HiNetBaseRequest {
   HiNetBaseRequest addHeader(String key, Object value) {
     header[key] = value.toString();
     return this;
+  }
+
+  /// 设置adapter 默认是mock
+  HiNetAdapter hiNetAdapter() {
+    return MockAdapter();
   }
 }

@@ -10,6 +10,8 @@ void main() {
     request.addHeader('token', 'value');
     var result = await HiNet.getInstance().fire(request);
 
-    expect(result, {'code': 0, 'message': 'success'});
+    expect(result['args'], {'aa': 'bbb'});
+    expect(result['headers']['Token'], 'value');
+    expect(result['url'], request.url());
   });
 }
