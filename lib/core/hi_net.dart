@@ -12,23 +12,25 @@ class HiNet {
   Future fire(BaseRequest request) async {
     var response = await send(request);
     var result = response['data'];
-    printLog(result);
+    printLog(request, result);
     return result;
   }
 
   Future<dynamic> send(BaseRequest request) async {
-    printLog('url: ${request.url()}');
-    printLog('method: ${request.httpMethod()}');
-    request.addHeader('token', '124');
-    printLog('header: ${request.header}');
-    printLog('params: ${request.params}');
+    printLog(request, 'url: ${request.url()}');
+    printLog(request, 'method: ${request.httpMethod()}');
+    printLog(request, 'header: ${request.header}');
+    printLog(request, 'params: ${request.params}');
     return Future.value({
       "statusCode": 200,
       "data": {"code": 0, "message": "success"}
     });
   }
 
-  void printLog(log) {
-    print('hi_net: ${log.toString()}');
+  void printLog(request, log) {
+    if (request.kDebugMode()) {
+      // ignore: avoid_print
+      print('hi_net: ${log.toString()}');
+    }
   }
 }

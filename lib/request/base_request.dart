@@ -44,12 +44,12 @@ abstract class BaseRequest {
       pathStr = "$pathStr/$pathParams";
     }
     // http和https切换
-    if (useHttps) {
+    if (useHttps()) {
       uri = Uri.https(authority(), pathStr, params);
     } else {
       uri = Uri.http(authority(), pathStr, params);
     }
-    if (kDebugMode) {
+    if (kDebugMode()) {
       // ignore: avoid_print
       print('url: ${uri.toString()}');
     }
