@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 enum HttpMethod { GET, POST, DELETE }
 
-abstract class BaseRequest {
+abstract class HiNetBaseRequest {
   // 请求路径参数 类似 /detail/1
   String pathParams = "";
 
@@ -22,7 +22,7 @@ abstract class BaseRequest {
 
   // 域名
   String authority() {
-    return "api.devio.org";
+    return "";
   }
 
   // 请求方法
@@ -57,13 +57,13 @@ abstract class BaseRequest {
   }
 
   /// 添加参数
-  BaseRequest add(String key, Object value) {
+  HiNetBaseRequest add(String key, Object value) {
     params[key] = value.toString();
     return this;
   }
 
   // 添加header
-  BaseRequest addHeader(String key, Object value) {
+  HiNetBaseRequest addHeader(String key, Object value) {
     header[key] = value.toString();
     return this;
   }

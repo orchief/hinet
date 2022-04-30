@@ -1,12 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hinet/core/hi_net.dart';
 
-import 'package:hinet/hinet.dart';
+import 'test_request.dart';
 
 void main() {
-  test('adds one to input values', () {
-    final calculator = Calculator();
-    expect(calculator.addOne(2), 3);
-    expect(calculator.addOne(-7), -6);
-    expect(calculator.addOne(0), 1);
+  test('测试接口返回格式结果', () async {
+    TestRequest request = TestRequest();
+    request.add('aa', 'bbb');
+    request.addHeader('token', 'value');
+    var result = await HiNet.getInstance().fire(request);
+
+    expect(result, {'code': 0, 'message': 'success'});
   });
 }

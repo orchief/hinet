@@ -1,6 +1,6 @@
 name: hinet
 description: http restful framework
-version: 0.0.3
+version: 0.0.5
 homepage: https://www.orchief.com
 
 environment:

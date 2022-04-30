@@ -9,14 +9,14 @@ class HiNet {
     return _instance!;
   }
 
-  Future fire(BaseRequest request) async {
+  Future fire(HiNetBaseRequest request) async {
     var response = await send(request);
     var result = response['data'];
     printLog(request, result);
     return result;
   }
 
-  Future<dynamic> send(BaseRequest request) async {
+  Future<dynamic> send(HiNetBaseRequest request) async {
     printLog(request, 'url: ${request.url()}');
     printLog(request, 'method: ${request.httpMethod()}');
     printLog(request, 'header: ${request.header}');
